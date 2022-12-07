@@ -1,4 +1,20 @@
-let currentPrice=0, itemCount=0
+const cart = {
+    currentPrice: 0,
+    items: [],
+    addItem: function(cookie, price) {
+        this.items.push(cookie); // add a cookie (string) to the items array
+
+        this.currentPrice = this.currentPrice + price; //add the price (number) to the currentPrice properties
+
+    },
+    clear: function() {
+        
+        currentPrice = 0;
+        this.items.length = 0;
+        //reset the currentPrice and items properties
+        
+    },
+}
 
 function addToCart(cookie) {
 
@@ -11,35 +27,41 @@ function addToCart(cookie) {
 
     console.log('The user is adding this type of cookie to their cart: ' , cookie) 
 
-    //document.getElementById("cartItems").innerText = itemCount;
-    console.log(itemCount++); //adds 1 to the itemCount variable and displays in the console 
-    document.getElementById("cartItems").innerText = itemCount;
+    //documenst.getElementById("cartItems").innerText = itemCount;
+    //console.log(itemCount++); //adds 1 to the itemCount variable and displays in the console 
     
+    //this.items.length;
 
     if(cookie == 'peanut butter')
-        currentPrice = currentPrice + 20;
+        cart.addItem(cookie, 20)
     if(cookie == 'sandies')
-        currentPrice = currentPrice + 30;
+        cart.addItem(cookie, 30)
     if(cookie == 'party press')
-        currentPrice = currentPrice + 35;
+        cart.addItem(cookie, 35)
     if(cookie == 'chocolate chip')
-        currentPrice = currentPrice + 25;
+        cart.addItem(cookie, 25)
     
-    console.log(currentPrice);
+    document.getElementById("cartItems").innerText = cart.items.length;
+    
+    //console.log(currentPrice);
 
-    document.querySelector("span").innerHTML = "$" + currentPrice;
-   //add the correct price to the currentPrice variable
-    
+    //cart.currentPrice;
+    document.querySelector("span").innerHTML = "$" + cart.currentPrice;
+   
+    //add the correct price to the currentPrice variable
+    console.log(cart)
 }
 
 function checkout() {
     console.log('User is checking out.')
     prompt("Enter your name:" + '\n' + "Enter your email:");
-    currentPrice = 0;
-    itemCount = 0;
+    //currentPrice = 0;
+    //itemCount = 0;
+    cart.clear();
 
-    document.querySelector("span").innerHTML = "$" + currentPrice;
-    document.getElementById("cartItems").innerText = itemCount;
+
+    document.querySelector("span").innerHTML = "$" + cart.price;
+    document.getElementById("cartItems").innerText = cart.items.length;
     
     //alert('You have ' + itemCount + ' item(s) in your cart. Your total cost is $' + currentPrice + '.');
     
