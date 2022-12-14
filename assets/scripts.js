@@ -14,6 +14,13 @@ const cart = {
         //reset the currentPrice and items properties
         
     },
+    getSummary: function() {
+        let summary = `<p>Number of Items: ${this.items.length}</p>
+            <h4>Details</h4>
+            <p>${this.items.join('<br>')}</p>
+            <p>Total Price: $${this.currentPrice}</p>`
+        return summary
+    },
 }
 
 function addToCart(cookie) {
@@ -54,7 +61,9 @@ function addToCart(cookie) {
 
 function checkout() {
     console.log('User is checking out.')
-    prompt("Enter your name:" + '\n' + "Enter your email:");
+    document.getElementById("summary-body").innerHTML = cart.summary;
+    document.getElementById("summary").style.display = "block";
+    //prompt("Enter your name:" + '\n' + "Enter your email:");
     //currentPrice = 0;
     //itemCount = 0;
     cart.clear();
@@ -75,3 +84,10 @@ function darkMode() {
     document.querySelector("body").style.color = "white";
 
 }
+
+function clearCart() {
+    cart.clear();
+    document.querySelector("span").innerHTML = "$" + cart.price;
+    document.getElementById("cartItems").innerText = cart.items.length;
+}
+
